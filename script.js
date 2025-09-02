@@ -1,3 +1,6 @@
+console.log('Script carregado');
+console.log('API_URL:', API_URL);
+
 // Variável global de autenticação
 let isAuthenticated = false;
 let currentUserEmail = '';
@@ -7,6 +10,7 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbxRW9icwOkeg5oTzy1MZWOh
 // Verificar autenticação
 async function checkAuthentication() {
     try {
+        console.log('Iniciando verificação de autenticação...');
         const payload = {
             action: "checkAuth"
         };
@@ -19,7 +23,11 @@ async function checkAuthentication() {
             body: JSON.stringify(payload)
         });
         
+        console.log('Status da resposta:', response.status);
+        console.log('Headers:', response.headers);
+        
         const data = await response.json();
+        console.log('Dados da resposta:', data);
         
         if (data.authenticated) {
             isAuthenticated = true;
@@ -27,6 +35,7 @@ async function checkAuthentication() {
             console.log('Usuário autenticado:', data.email);
             return true;
         } else {
+            console.log('Usuário não autenticado');
             showLoginPrompt(data.email);
             return false;
         }
