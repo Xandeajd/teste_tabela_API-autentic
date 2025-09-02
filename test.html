@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste API Google Sheets</title>
+</head>
+<body>
+  <h1>Teste conexão com App Script</h1>
+  <button id="btnSalvar">Salvar teste</button>
+  <button id="btnBuscar">Buscar teste</button>
+
+  <pre id="resultado"></pre>
+
+  <script>
+    const API_URL = "SUA_URL_DO_WEBAPP"; // coloque a URL do deploy do Apps Script
+
+    // Teste de salvar
+    document.getElementById("btnSalvar").addEventListener("click", async () => {
+      const payload = {
+        action: "salvar",
+        ano: 2025,
+        mes: 9,
+        dados: {
+          accounts: [{ name: "Aluguel", value: 1500 }],
+          extraIncome: [{ description: "Freela", value: 500 }],
+          salary: 3000
+        }
+      };
+
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+
+      document.getElementById("resultado").textContent = await res.text();
+    });
+
+    // Teste de buscar
+    document.getElementById("btnBuscar").addEventListener("click", async () => {
+      const payload = {
+        action: "buscar",
+        ano: 2025,
+        mes: 9
+      };
+
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+
+      document.getElementById("resultado").textContent = await res.text();
+    });
+  </script>
+</body>
+</html>
