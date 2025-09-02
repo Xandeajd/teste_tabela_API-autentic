@@ -1,7 +1,7 @@
 console.log('Script carregado');
 console.log('API_URL:', API_URL);
 
-
+const API_URL = 'https://script.google.com/macros/s/AKfycbxRW9icwOkeg5oTzy1MZWOha3QqfnAY9iQGUPNEulJ3naOJDqf13SZ9HNnORziLNJBN/exec';
 
 // Variável global de autenticação
 let isAuthenticated = false;
