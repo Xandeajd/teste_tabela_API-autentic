@@ -1,16 +1,16 @@
-console.log('Script carregado');
-console.log('API_URL:', API_URL);
-
-const API_URL = 'https://script.google.com/macros/s/AKfycbxRW9icwOkeg5oTzy1MZWOha3QqfnAY9iQGUPNEulJ3naOJDqf13SZ9HNnORziLNJBN/exec';
-
 // Variável global de autenticação
 let isAuthenticated = false;
 let currentUserEmail = '';
+
+// URL do Google Apps Script - DEVE VIR ANTES DE QUALQUER USO
+const API_URL = 'https://script.google.com/macros/s/AKfycbxRW9icwOkeg5oTzy1MZWOha3QqfnAY9iQGUPNEulJ3naOJDqf13SZ9HNnORziLNJBN/exec';
 
 // Verificar autenticação
 async function checkAuthentication() {
     try {
         console.log('Iniciando verificação de autenticação...');
+        console.log('API_URL:', API_URL);
+        
         const payload = {
             action: "checkAuth"
         };
@@ -24,7 +24,6 @@ async function checkAuthentication() {
         });
         
         console.log('Status da resposta:', response.status);
-        console.log('Headers:', response.headers);
         
         const data = await response.json();
         console.log('Dados da resposta:', data);
@@ -154,6 +153,9 @@ async function saveData() {
 
 // Modificar o evento DOMContentLoaded
 document.addEventListener('DOMContentLoaded', async function() {
+    console.log('Script carregado');
+    console.log('API_URL:', API_URL);
+    
     // Configurar event listeners primeiro
     document.getElementById('month').addEventListener('change', loadSavedData);
     document.getElementById('year').addEventListener('change', loadSavedData);
