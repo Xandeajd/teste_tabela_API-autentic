@@ -68,6 +68,9 @@ async function loadSavedData() {
     try {
         const res = await fetch(API_URL, {
             method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(payload)
         });
         
@@ -119,6 +122,9 @@ async function saveData() {
     try {
         const res = await fetch(API_URL, {
             method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(payload)
         });
         
@@ -139,7 +145,11 @@ async function saveData() {
 
 // Modificar o evento DOMContentLoaded
 document.addEventListener('DOMContentLoaded', async function() {
-    // Verificar autenticação primeiro
+    // Configurar event listeners primeiro
+    document.getElementById('month').addEventListener('change', loadSavedData);
+    document.getElementById('year').addEventListener('change', loadSavedData);
+    
+    // Verificar autenticação
     if (await checkAuthentication()) {
         // Só inicializar se estiver autenticado
         document.getElementById('addAccountBtn').addEventListener('click', addAccount);
@@ -157,7 +167,4 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         loadSavedData();
     }
-    
-    document.getElementById('month').addEventListener('change', loadSavedData);
-    document.getElementById('year').addEventListener('change', loadSavedData);
 });
